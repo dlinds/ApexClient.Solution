@@ -1,0 +1,61 @@
+@* @using ApexClient.Models
+  @model ApexClient.Models.Animal
+
+  <div class="container bg-light bg-gradient p-5 border rounded-3">
+  <div class="mx-5 p-5 border rounded shadow-sm bg-white">
+  <h3 class="mb-3">Create an animal</h3>
+  <div class="row">
+  <div class="col-7">
+  @using (Html.BeginForm("Create", "Animals", FormMethod.Post))
+  {
+  @Html.LabelFor(a => a.Name)
+  @Html.TextBoxFor(a => a.Name, new {@class="form-control mb-3 shadow-sm", required="required" })
+
+  @Html.LabelFor(a => a.Species)
+  @Html.TextBoxFor(a => a.Species, new {@class="form-control mb-3 shadow-sm", required="required" })
+
+  @Html.LabelFor(a => a.Gender)
+  <select name="Gender" id="Gender" class="form-control mb-3 shadow-sm" required="required">
+  <option disabled selected></option>
+  <option value="Male">Male</option>
+  <option value="Female">Female</option>
+  </select>
+
+  @Html.LabelFor(a => a.Breed)
+  @Html.TextBoxFor(a => a.Breed, new {@class="form-control mb-3 shadow-sm", required="required"})
+
+  @Html.LabelFor(a => a.Age)
+  @Html.TextBoxFor(a => a.Age, new {@class="form-control mb-3 shadow-sm", type="number", min="0", required="required"})
+
+  @Html.LabelFor(a => a.AdoptionPrice, "Adoption Price")
+  @Html.TextBoxFor(a => a.AdoptionPrice, new {@class="form-control mb-3 shadow-sm", type="number", min="0", required="required"})
+
+  @Html.LabelFor(a => a.GoodWithOtherAnimals, "Is the animal good with other animals?")
+  <select name="GoodWithOtherAnimals" id="GoodWithOtherAnimals" class="form-control mb-3 shadow-sm" required="required">
+  <option disabled selected></option>
+  <option value="true">Yes</option>
+  <option value="false">No</option>
+  </select>
+
+  @Html.LabelFor(a => a.GoodWithChildren, "Is the animal good with children?")
+  <select name="GoodWithChildren" id="GoodWithChildren" class="form-control mb-3 shadow-sm" required="required">
+  <option disabled selected></option>
+  <option value="true">Yes</option>
+  <option value="false">No</option>
+  </select>
+
+  @Html.LabelFor(a => a.DateListed, "Listing date")
+  @Html.TextBoxFor(a => a.DateListed, new {@class="form-control mb-3 shadow-sm", type="date", required="required"})
+
+  @Html.LabelFor(a => a.AnimalPhotoURL, "A url for a photo of the animal")
+  @Html.TextBoxFor(a => a.AnimalPhotoURL, new {@class="form-control mb-3 shadow-sm", required="required"})
+
+  <input type="submit" value="Add" class="btn travel-color-darkest text-white mb-3 shadow-sm" />
+  }
+  </div>
+  <div class="col-5">
+  <p>Use the form to the left to add an animal!</p>
+  </div>
+  </div>
+  </div>
+  </div> *@
