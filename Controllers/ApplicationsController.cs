@@ -16,11 +16,35 @@ namespace ApexClient.Controllers
   {
     public IActionResult Index(string name, string manufacturer, string version)
     {
-      var allApplications = Application.GetApplications(name, manufacturer, version);
-      ViewBag.Manufacturers = allApplications.Select(x => x.Manufacturer).Distinct().ToList();
-      ViewBag.Applications = allApplications.Select(x => x.Name).Distinct().ToList();
-      ViewBag.Versions = allApplications.Select(x => x.Version).Distinct().ToList();
-      return View(allApplications);
+      try
+      {
+        var allApplications = Application.GetApplications(name, manufacturer, version);
+        if (allApplications.Count == 0) throw new Exception();
+        ViewBag.Manufacturers = allApplications.Select(x => x.Manufacturer).Distinct().ToList();
+        ViewBag.Applications = allApplications.Select(x => x.Name).Distinct().ToList();
+        ViewBag.Versions = allApplications.Select(x => x.Version).Distinct().ToList();
+        return View(allApplications);
+      }
+      catch
+      {
+        return NotFound();
+      }
+    }
+
+    public ActionResult LoadApplicationSearchResults(string name, string manufacturer, string version)
+    {
+      try
+      {
+        var allApplications = Application.GetApplications(name, manufacturer, version);
+        if (allApplications.Count == 0) throw new Exception();
+        ViewData["applicationList"] = allApplications;
+        return PartialView("~/Views/Applications/Partial/_ApplicationTiles.cshtml");
+      }
+      catch
+      {
+        return NotFound("didn't find anything");
+      }
+
     }
 
     // public IActionResult Details(int id)

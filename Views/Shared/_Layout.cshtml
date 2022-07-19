@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Animal Shelter</title>
+  <title>Digital Apex Alexa</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -14,29 +14,33 @@
 </head>
 
 <body>
-  <div class="container">
-    <ul class="nav nav-justified shadow-sm">
-      <li class="nav-item border-end menu-item travel-color-darkest">
-        <a class="nav-link link-secondary text-white py-4 px-5" href="/">Home</a>
-      </li>
-      <li class="nav-item border-end menu-item travel-color-darkest dropdown">
-        <a class="nav-link link-secondary text-white py-4 px-5 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Find Animals
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <li class="text-center"><a class="dropdown-item" href="/animals"><u>All Animals</u></a></li>
-          <li class="text-center"><a class="dropdown-item" href="/animals?species=dog"><u>All Dogs</u></a></li>
-          <li class="text-center"><a class="dropdown-item" href="/animals?species=cat"><u>All Cats</u></a></li>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Digital Apex</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
         </ul>
-      </li>
-      <li class="nav-item border-end menu-item travel-color-darkest">
-        <a class="nav-link link-secondary text-white py-4 px-5" href="/animals/create">Add an Aminal</a>
-      </li>
-    </ul>
-    <div class="container-fluid px-0 pt-3 pb-2 ">
-      @RenderBody()
-      </main>
+      </div>
     </div>
+  </nav>
+  <div class="container-fluid px-3 pt-3 pb-2 ">
+    @RenderBody()
+    </main>
   </div>
   <script src="~/lib/jquery/dist/jquery.min.js"></script>
   <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
