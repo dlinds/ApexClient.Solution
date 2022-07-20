@@ -31,6 +31,29 @@ $("#applicationSearchForm").submit(event => {
   );
 });
 
+function loadCommandByApplicationId(id) {
+  console.log("test", id);
+  $.ajax(
+    {
+      url: '/Commands/LoadCommandsByAppId',
+      contentType: 'application/html; charset=utf-8',
+      type: 'GET',
+      dataType: 'html',
+      data: { applicationId: id },
+      success:
+        (response) => {
+          // Generate HTML table.
+          $('#applicationResult').html(response);
+        },
+      error:
+        (response) => {
+          console.log(response)
+          $('#applicationResult').html("<p>No applications were found this time!</p>");
+        }
+    }
+  );
+}
+
 const resetSelect = e => {
   $(`#${e}`).prop('selectedIndex', 0);
 }

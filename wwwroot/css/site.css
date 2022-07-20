@@ -108,3 +108,16 @@ body {
 .travel-color-darkest {
   background-color: #3e8ba8;
 }
+
+.clearSelect {
+  cursor: pointer;
+  position: absolute;
+  width: 10px;
+  font-weight: 550;
+  color: gray;
+  border: none;
+  background-color: transparent;
+  line-height: 35px;
+  left: calc(100% - 30px);
+  z-index: 99999;
+}

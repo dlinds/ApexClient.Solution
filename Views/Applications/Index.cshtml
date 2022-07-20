@@ -11,8 +11,8 @@
         </p>
         @* <form method="GET" action="/applications"> *@
         <form id="applicationSearchForm">
-          <div class="form-group my-3">
-            <label for="manufacturer" class="mb-2">Manufacturer</label>
+          <label for="manufacturer">Manufacturer</label>
+          <div class="input-group my-3">
             <select class="form-control" id="manufacturer" name="manufacturer">
               <option disabled selected>-- Select --</option>
               @foreach (string manufacturer in ViewBag.Manufacturers)
@@ -20,9 +20,10 @@
                 <option value="@manufacturer">@manufacturer</option>
               }
             </select>
+            <i class="bi bi-x-lg clearSelect" onClick="resetSelect('manufacturer')"></i>
           </div>
-          <div class="form-group  my-3">
-            <label for="name" class="mb-2">Application Name</label>
+          <label for="name">Application Name</label>
+          <div class="input-group mb-3">
             <select class="form-control" id="name" name="name">
               <option disabled selected>-- Select --</option>
               @foreach (string name in ViewBag.Applications)
@@ -30,9 +31,10 @@
                 <option value="@name">@name</option>
               }
             </select>
+            <i class="bi bi-x-lg clearSelect" onClick="resetSelect('name')"></i>
           </div>
-          <div class="form-group my-3">
-            <label for="version" class="mb-2">Version</label>
+          <label for="version">Version</label>
+          <div class="input-group mb-3">
             <select class="form-control" id="version" name="version">
               <option disabled selected>-- Select --</option>
               @foreach (string version in ViewBag.Versions)
@@ -40,7 +42,7 @@
                 <option value="@version">@version</option>
               }
             </select>
-            <p onClick="resetSelect('version')">X</p>
+            <i class="bi bi-x-lg clearSelect" onClick="resetSelect('version')"></i>
           </div>
           <button class="btn btn-sm w-50 travel-color-darkest text-white shadow-sm">Search</button>
         </form>
