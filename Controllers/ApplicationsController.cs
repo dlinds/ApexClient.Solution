@@ -23,6 +23,7 @@ namespace ApexClient.Controllers
         ViewBag.Manufacturers = allApplications.Select(x => x.Manufacturer).Distinct().ToList();
         ViewBag.Applications = allApplications.Select(x => x.Name).Distinct().ToList();
         ViewBag.Versions = allApplications.Select(x => x.Version).Distinct().ToList();
+        ViewBag.NewApplicationId = (TempData["newApplicationId"] != null) ? TempData["newApplicationId"] : null;
         return View(allApplications);
       }
       catch
@@ -44,6 +45,19 @@ namespace ApexClient.Controllers
       {
         return NotFound("didn't find anything");
       }
+    }
+
+    public IActionResult Create()
+    {
+      return View();
+    }
+
+    [HttpPost]
+    public ActionResult Create(Application application)
+    {
+      string newApplicationId = Application.CreateApplication(application);
+      TempData["newApplicationId"] = newApplicationId;
+      return RedirectToAction("Index");
     }
 
   }

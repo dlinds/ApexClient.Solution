@@ -15,7 +15,7 @@ namespace ApexClient.Models
 
     public static List<Application> GetApplications(string name, string manufacturer, string version)
     {
-      var apiCallTask = ApexApiHelper.Application.GetAll(name, manufacturer, version);
+      var apiCallTask = ApexApiHelper.ApplicationMethods.GetAll(name, manufacturer, version);
       var result = apiCallTask.Result;
       JArray jsonResponse = JsonConvert.DeserializeObject<JArray>(result);
       List<Application> applicationList = JsonConvert.DeserializeObject<List<Application>>(jsonResponse.ToString());
@@ -25,13 +25,20 @@ namespace ApexClient.Models
 
     public static Application GetApplicationById(string applicationId)
     {
-      var apiCallTask = ApexApiHelper.Application.GetApplicationById(applicationId);
+      var apiCallTask = ApexApiHelper.ApplicationMethods.GetApplicationById(applicationId);
       var result = apiCallTask.Result;
       JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
       Application application = JsonConvert.DeserializeObject<Application>(jsonResponse.ToString());
       return application;
     }
 
+    public static string CreateApplication(Application application)
+    {
+
+      var apiCallTask = ApexApiHelper.ApplicationMethods.CreateApplication(application);
+      string newApplicationId = apiCallTask.Result;
+      return newApplicationId.Trim('"');
+    }
 
   }
 }

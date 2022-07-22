@@ -6,7 +6,7 @@ namespace ApexClient.Models
 {
   class ApexApiHelper
   {
-    public class Application
+    public class ApplicationMethods
     {
       public static async Task<string> GetAll(string name, string manufacturer, string version)
       {
@@ -24,9 +24,20 @@ namespace ApexClient.Models
         return response.Content;
       }
 
+      public static async Task<string> CreateApplication(Application application)
+      {
+        RestClient client = new RestClient("https://localhost:5000/api");
+        RestRequest request = new RestRequest($"applications/add", Method.POST);
+        request.AddQueryParameter("manufacturer", application.Manufacturer);
+        request.AddQueryParameter("name", application.Name);
+        request.AddQueryParameter("version", application.Version);
+        var response = await client.ExecuteTaskAsync(request);
+        return response.Content;
+      }
+
     }
 
-    public class Command
+    public class CommandMethods
     {
       public static async Task<string> GetAll(string searchTerm, string appName, string submissionText)
       {

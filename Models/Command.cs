@@ -16,7 +16,7 @@ namespace ApexClient.Models
 
     public static List<Command> GetCommand(string searchTerm, string appName, string submissionText)
     {
-      var apiCallTask = ApexApiHelper.Command.GetAll(searchTerm, appName, submissionText);
+      var apiCallTask = ApexApiHelper.CommandMethods.GetAll(searchTerm, appName, submissionText);
       var result = apiCallTask.Result;
       JArray jsonResponse = JsonConvert.DeserializeObject<JArray>(result);
       List<Command> commandList = JsonConvert.DeserializeObject<List<Command>>(jsonResponse.ToString());
@@ -26,7 +26,7 @@ namespace ApexClient.Models
 
     public static List<Command> GetCommandsByAppId(string applicationId)
     {
-      var apiCallTask = ApexApiHelper.Command.GetCommandsByAppId(applicationId);
+      var apiCallTask = ApexApiHelper.CommandMethods.GetCommandsByAppId(applicationId);
       var result = apiCallTask.Result;
       JArray jsonResponse = JsonConvert.DeserializeObject<JArray>(result);
       List<Command> commandList = JsonConvert.DeserializeObject<List<Command>>(jsonResponse.ToString());
@@ -35,7 +35,7 @@ namespace ApexClient.Models
 
     public static Command GetCommandById(string commandId)
     {
-      var apiCallTask = ApexApiHelper.Command.GetCommandById(commandId);
+      var apiCallTask = ApexApiHelper.CommandMethods.GetCommandById(commandId);
       var result = apiCallTask.Result;
       JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
       Command command = JsonConvert.DeserializeObject<Command>(jsonResponse.ToString());
@@ -46,7 +46,7 @@ namespace ApexClient.Models
     {
       try
       {
-        var apiCallTask = ApexApiHelper.Command.CreateCommand(applicationId, keyword, shortcut);
+        var apiCallTask = ApexApiHelper.CommandMethods.CreateCommand(applicationId, keyword, shortcut);
         var result = apiCallTask.Result;
         return true;
       }
@@ -60,7 +60,7 @@ namespace ApexClient.Models
     {
       try
       {
-        var apiCallTask = ApexApiHelper.Command.EditCommand(commandId, keyword, shortcut);
+        var apiCallTask = ApexApiHelper.CommandMethods.EditCommand(commandId, keyword, shortcut);
         var result = apiCallTask.Result;
         return true;
       }

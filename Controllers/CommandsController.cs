@@ -20,6 +20,7 @@ namespace ApexClient.Controllers
       {
         List<Command> commandList = Command.GetCommandsByAppId(applicationId).OrderByDescending(x => x.CallCount).ToList();
         ViewData["commandList"] = commandList;
+        ViewData["applicationId"] = Application.GetApplicationById(applicationId);
         return PartialView("~/Views/Applications/Partial/_ApplicationDetail.cshtml");
       }
       catch
