@@ -18,7 +18,7 @@ namespace ApexClient.Controllers
     {
       try
       {
-        List<Command> commandList = Command.GetCommandsByAppId(applicationId).OrderBy(x => x.CallCount).ToList();
+        List<Command> commandList = Command.GetCommandsByAppId(applicationId).OrderByDescending(x => x.CallCount).ToList();
         ViewData["commandList"] = commandList;
         return PartialView("~/Views/Applications/Partial/_ApplicationDetail.cshtml");
       }
@@ -28,7 +28,45 @@ namespace ApexClient.Controllers
       }
     }
 
+    public ActionResult LoadNewEditCommandForm(string applicationId, string commandId)
+    {
+      try
+      {
+        Application application = Application.GetApplicationById(applicationId);
+        if (application.Name == null) throw new Exception("No application was found");
+        ViewData["application"] = application;
+        ViewData["command"] = (commandId != null) ? Command.GetCommandById(commandId) : null;
+        return PartialView("~/Views/Applications/Partial/_NewCommand.cshtml");
+      }
+      catch (Exception e)
+      {
+        return NotFound(e.Message);
+      }
+    }
 
+
+    [HttpPost]
+    public ActionResult CreateNewCommand(string applicationId, string keyword, string shortcut, string commandId)
+    {
+      try
+      {
+        Application application = Application.GetApplicationById(applicationId);
+        if (application.Name == null) throw new Exception("No application was found");
+        if (commandId == null)
+        {
+          Command.CreateCommand(applicationId, keyword, shortcut);
+        }
+        else
+        {
+          Command.EditCommand(commandId, keyword, shortcut);
+        }
+        return Ok();
+      }
+      catch (Exception e)
+      {
+        return NotFound(e.Message);
+      }
+    }
 
   }
 }

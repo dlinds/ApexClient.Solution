@@ -22,7 +22,7 @@
               Call Count: @command.CallCount
             </div>
             <div>
-              <button type="button" class="btn btn-sm travel-color-darkest text-white">Edit</button>
+              <button type="button" class="btn btn-sm travel-color-darkest text-white" onClick="loadNewCommandForm('@command.Application.ApplicationId', '@command.CommandId')">Edit</button>
             </div>
           </div>
         </li>
@@ -30,6 +30,6 @@
     }
   </ol>
   <div class="d-flex justify-content-center">
-    <button type="button" class="btn btn-sm travel-color-darkest text-white mt-3">Add New</button>
+    <button type="button" onClick="loadNewCommandForm('@commands[0].Application.ApplicationId')" class="btn btn-sm travel-color-darkest text-white mt-3">Add New</button>
   </div>
 </div>

@@ -23,6 +23,15 @@ namespace ApexClient.Models
       return applicationList;
     }
 
+    public static Application GetApplicationById(string applicationId)
+    {
+      var apiCallTask = ApexApiHelper.Application.GetApplicationById(applicationId);
+      var result = apiCallTask.Result;
+      JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
+      Application application = JsonConvert.DeserializeObject<Application>(jsonResponse.ToString());
+      return application;
+    }
+
 
   }
 }

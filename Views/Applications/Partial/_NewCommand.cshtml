@@ -1,0 +1,36 @@
+@using ApexClient.Models
+@{
+  Application app = ViewData["application"] as Application;
+  Command command = (ViewData["command"] as Command != null) ? ViewData["command"] as Command : new Command();
+}
+
+<div class="w-100 bg-white p-3 rounded border shadow-sm mt-3">
+  <h1 class="fw-light text-center mb-0">Commands</h1>
+  <h3 class="fw-light text-center mb-0">@app.Manufacturer @app.Name @app.Version </h3>
+  <form id="newCommandForm" method="post">
+    <div class="input-group my-3">
+      <span class="input-group-text" id="keyword">Apex says</span>
+      <input type="text" class="form-control" value='@command.Shortcut' name="shortcut" id="shortcut" placeholder="Shortcut" aria-label="Shortcut" aria-describedby="keyword">
+      <span class="input-group-text">to</span>
+      <input type="text" class="form-control" value='@command.Keyword' name="keyword" id="keyword" placeholder="Keyword" aria-label="Keyword" aria-describedby="keyword">
+      <span class="input-group-text">in @app.Name</span>
+    </div>
+    <input type="hidden" value="@app.ApplicationId" id="applicationId" name="ApplicationId">
+    @{
+      string commandId = (command.Shortcut != null) ? command.CommandId.ToString() : null;
+    }
+    <input type="hidden" value="@commandId" id="commandId" name="commandId">
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-sm travel-color-darkest text-white mt-3 px-3">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
+
+<script>
+  $('#newCommandForm').submit(event => {
+    event.preventDefault();
+    newCommandForm(event)
+  });
+</script>

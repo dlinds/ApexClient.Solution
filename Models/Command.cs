@@ -33,5 +33,41 @@ namespace ApexClient.Models
       return commandList;
     }
 
+    public static Command GetCommandById(string commandId)
+    {
+      var apiCallTask = ApexApiHelper.Command.GetCommandById(commandId);
+      var result = apiCallTask.Result;
+      JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
+      Command command = JsonConvert.DeserializeObject<Command>(jsonResponse.ToString());
+      return command;
+    }
+
+    public static bool CreateCommand(string applicationId, string keyword, string shortcut)
+    {
+      try
+      {
+        var apiCallTask = ApexApiHelper.Command.CreateCommand(applicationId, keyword, shortcut);
+        var result = apiCallTask.Result;
+        return true;
+      }
+      catch
+      {
+        return false;
+      }
+    }
+
+    public static bool EditCommand(string commandId, string keyword, string shortcut)
+    {
+      try
+      {
+        var apiCallTask = ApexApiHelper.Command.EditCommand(commandId, keyword, shortcut);
+        var result = apiCallTask.Result;
+        return true;
+      }
+      catch
+      {
+        return false;
+      }
+    }
   }
 }
