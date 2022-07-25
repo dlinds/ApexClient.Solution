@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using System;
+using System.Web;
 
 namespace ApexClient.Controllers
 {
@@ -45,21 +46,28 @@ namespace ApexClient.Controllers
       }
     }
 
+    [HttpGet]
+    public ActionResult Create()
+    {
+      ViewBag.Applications = Application.GetApplications();
+      return View();
+    }
 
     [HttpPost]
-    public ActionResult CreateNewCommand(string applicationId, string keyword, string shortcut, string commandId)
+    public ActionResult CreateNewCommand(string applicationId, string keyword, string shortcut, string commandId = null)
     {
+      // shortcut = HttpUtility.UrlEncode(shortcut);
       try
       {
         Application application = Application.GetApplicationById(applicationId);
         if (application.Name == null) throw new Exception("No application was found");
         if (commandId == null)
         {
-          Command.CreateCommand(applicationId, keyword, shortcut);
+          Command.CreateCommand(applicationId, keyword, HttpUtility.UrlEncode(shortcut));
         }
         else
         {
-          Command.EditCommand(commandId, keyword, shortcut);
+          Command.EditCommand(commandId, keyword, HttpUtility.UrlEncode(shortcut));
         }
         return Ok();
       }

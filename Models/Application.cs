@@ -13,7 +13,7 @@ namespace ApexClient.Models
     public string Name { get; set; }
     public string Version { get; set; }
 
-    public static List<Application> GetApplications(string name, string manufacturer, string version)
+    public static List<Application> GetApplications(string name = "", string manufacturer = "", string version = "")
     {
       var apiCallTask = ApexApiHelper.ApplicationMethods.GetAll(name, manufacturer, version);
       var result = apiCallTask.Result;

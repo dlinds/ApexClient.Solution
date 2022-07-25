@@ -16,7 +16,7 @@
         foreach (Command command in commands)
         {
           <li class="list-group-item">
-            <div class="d-flex justify-content-between">
+            <div class="d-md-flex d-none justify-content-between">
               <div>
                 Apex says @command.Shortcut to @command.Keyword in @command.Application.Name
               </div>
@@ -25,6 +25,17 @@
                   Call Count: @command.CallCount
                 </div>
                 <button type="button" class="btn btn-sm travel-color-darkest text-white" onClick="loadNewCommandForm('@command.Application.ApplicationId', '@command.CommandId')">Edit</button>
+              </div>
+            </div>
+            <div class="d-md-none row">
+              <div class="col-7">
+                Apex says @command.Shortcut to @command.Keyword in @command.Application.Name
+              </div>
+              <div class="col-5">
+                Call Count: @command.CallCount
+              </div>
+              <div class="col-12 d-flex justify-content-center">
+                <button type="button" class="btn btn-sm travel-color-darkest text-white w-25 my-3" onClick="loadNewCommandForm('@command.Application.ApplicationId', '@command.CommandId')">Edit</button>
               </div>
             </div>
           </li>
