@@ -31,6 +31,10 @@
 <script>
   $('#newCommandForm').submit(event => {
     event.preventDefault();
-    newCommandForm(event)
+  @* console.log("here: ", newCommandForm(event)); *@
+  if (newCommandForm(event) == true) {
+      console.log("@app.ApplicationId");
+      loadCommandByApplicationId("@app.ApplicationId");
+    }
   });
 </script>

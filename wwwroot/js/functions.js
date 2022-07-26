@@ -1,11 +1,11 @@
-function newCommandForm(event) {
-  console.log(event);
+async function newCommandForm(event) {
+  // console.log(event);
   const applicationId = event.target.applicationId.value;
   const keyword = event.target.keyword.value;
   const shortcut = event.target.shortcut.value;
   const commandId = (event.target.commandId.value != null) ? event.target.commandId.value : null;
-  console.log("here: ", applicationId, keyword, shortcut)
-  $.ajax(
+  // console.log("here: ", applicationId, keyword, shortcut)
+  await $.ajax(
     {
       url: '/Commands/CreateNewCommand',
       type: 'POST',
@@ -16,7 +16,7 @@ function newCommandForm(event) {
         },
       error:
         (response) => {
-          $('#applicationResult').html(`<p>There was an issue posting the new command: ${response.responseText}</p>`);
+          $('#result').html(`<p>There was an issue posting the new command: ${response.responseText}</p>`);
         }
     }
   );
@@ -33,12 +33,12 @@ function loadCommandByApplicationId(id) {
       success:
         (response) => {
           // Generate HTML table.
-          $('#applicationResult').html(response);
+          $('#result').html(response);
         },
       error:
         (response) => {
           console.log(response)
-          $('#applicationResult').html("<p>No applications were found this time!</p>");
+          $('#result').html("<p>No applications were found this time!</p>");
         }
     }
   );
@@ -56,12 +56,12 @@ function loadNewCommandForm(applicationId, commandId) {
       success:
         (response) => {
           // Generate HTML table.
-          $('#applicationResult').html(response);
+          $('#result').html(response);
         },
       error:
         (response) => {
           console.log(response)
-          $('#applicationResult').html("<p>No applications were found this time!</p>");
+          $('#result').html("<p>No applications were found this time!</p>");
         }
     }
   );

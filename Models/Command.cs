@@ -50,9 +50,9 @@ namespace ApexClient.Models
         var result = apiCallTask.Result;
         return true;
       }
-      catch
+      catch (Exception e)
       {
-        return false;
+        throw new Exception(e.Message);
       }
     }
 

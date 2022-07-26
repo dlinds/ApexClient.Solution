@@ -4,28 +4,39 @@
 <div class="p-3 p-md-5 border rounded shadow-sm bg-light d-flex justify-content-center">
   <div class="mx-0 mx-md-5 p-3 p-md-5 border rounded shadow-sm bg-white w-100 w-md-75">
     <h3 class="mb-3">Add a new Command</h3>
-
-    @using (Html.BeginForm("CreateNewCommand", "Commands", FormMethod.Post))
+    @using (Html.BeginForm("CreateNewCommand", "Commands", FormMethod.Post, new { id = "newCommandForm" }))
     {
-      @Html.LabelFor(a => a.Shortcut)
-      @Html.TextBoxFor(a => a.Shortcut, new {@class="form-control mb-3 shadow-sm", required="required", placeholder="Ex: Microsoft" })
-
-      @Html.LabelFor(a => a.Keyword)
-      @Html.TextBoxFor(a => a.Keyword, new {@class="form-control mb-3 shadow-sm", required="required", placeholder="Ex: Excel" })
-
-      <label for="ApplicationId">
-        Application
-      </label>
-      <select class="form-control mb-3 shadow-sm" id="ApplicationId" name="ApplicationId">
-        @{
-          foreach (var application in ViewBag.Applications)
-          {
-            <option value="@application.ApplicationId">@application.Manufacturer @application.Name @application.Version</option>
+      <div class="input-group my-3">
+        <span class="input-group-text shadow-sm pe-4" id="keyword">Apex says</span>
+        @Html.TextBoxFor(a => a.Shortcut, new {@class="form-control shadow-sm", aria_describedby="shortcut", required="required", placeholder="Shortcut ex: Control C", name="shortcut", id="shortcut" })
+        <span class="input-group-text shadow-sm px-4">to</span>
+        @Html.TextBoxFor(a => a.Keyword, new {@class="form-control shadow-sm", aria_describedby="keyword", required="required", placeholder="Keyword ex: Copy",name="keyword", id="keyword" })
+        <span class="input-group-text shadow-sm px-4">in</span>
+        <select class="form-control shadow-sm" id="applicationId" name="applicationId" required="required">
+          <option disabled selected>-- Select Application --</option>
+          @{
+            foreach (var application in ViewBag.Applications)
+            {
+              <option value="@application.ApplicationId">@application.Manufacturer @application.Name @application.Version</option>
+            }
           }
-        }
-      </select>
-      <input type="submit" value="Add" class="btn travel-color-darkest text-white mb-3 shadow-sm" />
+        </select>
+      </div>
+      <input type="hidden" name="commandId" value="">
+      <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-sm travel-color-darkest text-white px-3 shadow-sm">
+          Submit
+        </button>
+      </div>
     }
 
   </div>
 </div>
+<div id="result" class="mt-3"></div>
+<script>
+  $("#newCommandForm").submit(event => {
+    event.preventDefault();
+    newCommandForm(event);
+    $("#newCommandForm").trigger("reset");
+  });
+</script>

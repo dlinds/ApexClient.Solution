@@ -16,11 +16,11 @@ $("#applicationSearchForm").submit(event => {
       success:
         (response) => {
           // Generate HTML table.
-          $('#applicationResult').html(response);
+          $('#result').html(response);
         },
       error:
         (response) => {
-          $('#applicationResult').html("<p>No applications were found!</p>");
+          $('#result').html("<p>No applications were found!</p>");
         }
     }
   );

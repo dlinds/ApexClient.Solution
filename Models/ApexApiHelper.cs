@@ -70,7 +70,16 @@ namespace ApexClient.Models
         RestClient client = new RestClient(Api_Uri);
         RestRequest request = new RestRequest($"commands/add?applicationId={applicationId}&keyword={keyword}&shortcut={shortcut}", Method.POST);
         var response = await client.ExecuteTaskAsync(request);
-        return response.Content;
+
+        if (response.StatusCode.ToString() != "OK")
+        {
+          Console.WriteLine(response.StatusCode.ToString());
+          throw new Exception(response.Content);
+        }
+        else
+        {
+          return response.Content;
+        }
       }
 
       public static async Task<string> EditCommand(string commandId, string keyword, string shortcut)
